@@ -1,5 +1,13 @@
 import React, { useState, useEffect }from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { 
+    KeyboardAvoidingView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+    Image
+} from 'react-native'
 import { auth } from '../firebase'
 import { 
     createUserWithEmailAndPassword,
@@ -47,6 +55,11 @@ const LoginScreen = () => {
         style={styles.container}
         behavior='padding'
     >
+      <View style={styles.imageContainer}>
+        <Image 
+        style={styles.image}
+        source={require('../assets/sayge-logo.png')} />
+      </View>
       <View style={styles.inputContainer}>
         <TextInput
             placeholder="Email"
@@ -83,6 +96,11 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    image: {
+        width: 120,
+        height: 100,
+        marginBottom: 10
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
