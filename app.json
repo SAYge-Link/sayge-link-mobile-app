@@ -4,7 +4,7 @@
     "slug": "sayge-link-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/sayge-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -15,7 +15,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.yourappname",
+      "buildNumber": "1.0.0",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +27,28 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyCaQ__x9a8Egp0vvL_PMh0wT1PhOtyvsUQ",
+          "authDomain": "sayge-link-auth.firebaseapp.com",
+          "projectId": "sayge-link-auth",
+          "storageBucket": "sayge-link-auth.appspot.com",
+          "messagingSenderId": "471984324994",
+          "appId": "1:471984324994:web:f9440ec9a596a090750f9b",
+          "measurementId": "G-2R077ND0RN"
+        }
+      }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ]
   }
 }
