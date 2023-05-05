@@ -5,12 +5,21 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
 
+import { init, track } from '@amplitude/analytics-react-native';
+
+init('')
+
 const HomeScreen = () => {
   const navigation = useNavigation()
 
   const handleSignout = () => {
+    const user_email = auth.currentUser.email;
     signOut(auth)
-      .then(() => {
+      .then((user) => {
+        console.log(user)
+        track("Signout", undefined, {
+          user_id: user_email
+        })
         navigation.replace("Login")
       })
       .catch(error => alert(error.message))
