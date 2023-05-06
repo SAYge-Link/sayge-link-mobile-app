@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { signOut } from 'firebase/auth'
 
 import { auth } from '../firebase'
@@ -12,6 +12,11 @@ init('')
 const HomeScreen = () => {
   const navigation = useNavigation()
 
+  useEffect(() => {
+    track('Visisted Home', undefined, {
+      user_id: auth.currentUser?.email
+    })
+  })
   const handleSignout = () => {
     const user_email = auth.currentUser.email;
     signOut(auth)
@@ -77,12 +82,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
       color: "white",
-      fontWeight: 700,
+      fontWeight: "700",
       fontSize: 16
   },
   buttonOutlineText: {
       color: "#abe9de",
-      fontWeight: 700,
+      fontWeight: "700",
       fontSize: 16
   },
   
