@@ -14,7 +14,10 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged
 } from "firebase/auth"
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import { init, track } from '@amplitude/analytics-react-native';
+
+init('');
 
 const LoginScreen = () => {
   
@@ -43,9 +46,12 @@ const LoginScreen = () => {
 
   const handleLogin  = () => {
     signInWithEmailAndPassword(auth, email, password)
-    .then(userCredentials => {
+    .then(async (userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with: ", user.email);
+        track('Logged in', undefined, {
+            user_id: user.email
+        });
     })
     .catch(error => alert(error.message))
   }

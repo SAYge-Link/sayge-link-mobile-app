@@ -1,16 +1,30 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { signOut } from 'firebase/auth'
 
 import { auth } from '../firebase'
 import { useNavigation } from '@react-navigation/native'
 
+import { init, track } from '@amplitude/analytics-react-native';
+
+init('')
+
 const HomeScreen = () => {
   const navigation = useNavigation()
 
+  useEffect(() => {
+    track('Visisted Home', undefined, {
+      user_id: auth.currentUser?.email
+    })
+  })
   const handleSignout = () => {
+    const user_email = auth.currentUser.email;
     signOut(auth)
-      .then(() => {
+      .then((user) => {
+        console.log(user)
+        track("Signout", undefined, {
+          user_id: user_email
+        })
         navigation.replace("Login")
       })
       .catch(error => alert(error.message))
@@ -68,12 +82,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
       color: "white",
-      fontWeight: 700,
+      fontWeight: "700",
       fontSize: 16
   },
   buttonOutlineText: {
       color: "#abe9de",
-      fontWeight: 700,
+      fontWeight: "700",
       fontSize: 16
   },
   
